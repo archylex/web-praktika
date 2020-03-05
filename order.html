@@ -1,0 +1,263 @@
+<html> 
+<head>
+    <title>Order</title>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Rubik+Mono+One" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">    
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src="plugins/js/pdfmake.min.js"></script>
+    <script src="plugins/js/vfs_fonts.js"></script>
+    <script src='plugins/js/screen.js'></script>
+</head>
+<body>
+    <div class="main_wrapper">
+        <div class="web_header">
+            <table class="header_table">
+                <tr>
+                    <td><img src="img/logo.png" border="0" /></td>
+                    <td></td>
+                    <td class="adress_box">
+                        <table class="table_adress_header">
+                            <tr>
+                                <td class="adress_header">г. Симферополь,</td>
+                            </tr>
+                            <tr>
+                                <td class="adress_header">ул. Крылова, 131</td>
+                            </tr>
+                            <tr>
+                                <td class="adress_header">тел.: +7 (978) 215-88-02</td>
+                            </tr>
+                            <tr>
+                                <td class="adress_header">e-mail: praktika.crimea@mail.ru</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="web_menu">
+            <table class="top_menu_table">
+                <tr class="menu_title">
+                    <td class="top_menu_cancel"><button class="order_operation_button"> ОТМЕНА </button></td>
+                    <td></td>
+                    <td class="top_menu_add"><button class="js-modal-show order_operation_button" name="add-element-modal" /> ДОБАВИТЬ </button></td>
+                    <td class="top_menu_ok"><button class="js-modal-show order_operation_button" name="finish-order-modal" /> ОФОРМИТЬ </button></td>
+                </tr>
+            </table>
+        </div>
+        <div class="table_header">
+            <table class="order_table">
+                <tr class="order_tr_title">                    
+                    <td class="order_table_num">№</td>
+                    <td class="order_table_item_title">наименование</td>
+                    <td class="order_count">кол-во</td>
+                    <td class="order_price">цена</td>
+                    <td class="order_sum">сумма</td>
+                    <td class="order_action">&nbsp;</td>
+                </tr>
+            </table>        
+        </div>
+        
+        <div id="table_content_empty" class="table_content_empty">
+            <span id="empty-span"> ПУСТО </span>            
+        </div>
+        
+        <div id="table_content" class="table_content">
+            <table id="doar-table" class="order_table">                
+            </table>  
+            <table class="order_table">
+                <tr class="order_tr_title">                    
+                    <td class="esum">итого:</td>
+                    <td id="ordersum" class="order_sum"></td>             
+                </tr>
+            </table>  
+        </div>
+      
+        <div class="web_footer">
+            <span id="footer-span"> (c) Powered by ErrantBite <br> (c) 2018 </span>
+        </div>
+    </div>
+    
+    
+    <div id="add-element-modal">
+        <h1>Добавить товар</h1>
+
+        <ul class="tab-group">
+            <li class="tab active"><a href="#doars">двери</a></li>
+            <li class="tab"><a href="#molds">погонаж</a></li>
+        </ul>
+
+        <div id="tabs">
+            <div id="doars">
+                <center>
+                <table class="order_table">
+                    <tr class="order_tr_title">
+                        <td class="order_count">кол-во</td>
+                        <td class="order_collection">коллекция</td>
+                        <td class="order_model">модель</td>
+                        <td class="order_type">тип покрытия</td>
+                        <td class="order_pattern">паттерн</td>
+                        <td class="order_action">опция</td>                        
+                    </tr>
+                    <tr>
+                        <td class="order_count">
+                            <select class="js-select js-select-counter order_count" data-counter="20" data-category="doar" data-id="1" data-name="counter" data-type="exception">
+                            </select>
+                        </td>
+                        <td class="order_collection">
+                            <select class="js-select order_collection" data-category="doar" data-id="1" data-name="collection">
+                               <option value="">—</option>                                            
+                            </select>
+                        </td>
+                        <td class="order_model">
+                            <select class="js-select order_model" data-category="doar" data-id="1" data-name="model" disabled>
+                                <option value="">—</option>
+                            </select>
+                        </td>
+                        <td class="order_type">
+                            <select class="js-select order_type" data-category="doar" data-id="1" data-name="type" disabled>
+                                <option value="">—</option>
+                            </select>
+                        </td>
+                        <td class="order_pattern">
+                            <select class="js-select order_pattern" data-category="doar" data-id="1" data-name="pattern" data-rows='["id","price"]' disabled>
+                                <option value="">—</option>
+                            </select>
+                        </td>
+                        <td class="order_action"> 
+                            <button class="select_button order_row_button" data-info='{"name":"sub", "category":"doar", "id":"1"}' data-selects='[{"category":"option", "name":"category"},{"category":"option", "name":"item"}]' data-parents='[{"name":"collection", "category":"doar", "id":"1"}, {"name":"model", "category":"doar", "id":"1"}]' data-rows='["id","price"]'> добавить </button>
+                        </td>
+                    </tr>
+                </table>
+
+                        
+                <table id="option" class="order_table">
+                    <tr class="order_tr_title">                    
+                        <td class="order_type_view">вид</td>
+                        <td class="order_option">опция</td>                    
+                        <td class="order_action">&nbsp;</td>
+                    </tr>
+                </table>
+
+
+                <table class="order_table_button">
+                    <tr>
+                        <td class="add_item_button_space"></td>
+                        <td>
+                            <button name="add-element-modal" class="js-modal-hide js-modal-cancel order_operation_button"> ОТМЕНА </button>
+                        </td>
+                        <td class="add_item_button_space"></td>
+                        <td>                            
+                            <button name="add-element-modal" class="order_operation_button js-modal-hide js-modal-ok" data-category="doar"> ДОБАВИТЬ </button>
+                        </td>
+                        <td class="add_item_button_space"></td>
+                    </tr>
+                </table>
+                </center>            
+                
+            </div>
+
+            
+            <div id="molds">
+                <center>
+                <table class="order_table">
+                    <tr class="order_tr_title">
+                        <td class="order_count">кол-во</td>
+                        <td class="order_molding">пoгонаж</td>
+                        <td class="order_type">тип покрытия</td>
+                        <td class="order_pattern">паттерн</td>                      
+                    </tr>
+                    <tr>
+                        <td>
+                            <select class="js-select js-select-counter order_count" data-counter="20" data-category="mold" data-id="1" data-name="counter" data-type="exception">
+                            </select>
+                        </td>
+                        <td>
+                            <select class="js-select order_molding" data-category="mold" data-id="1" data-name="molding">
+                                <option value="">—</option>                                       
+                            </select>
+                        </td>                        
+                        <td>
+                            <select class="js-select order_type" data-category="mold" data-id="1" data-name="type" disabled>
+                                <option value="!">—</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="js-select order_pattern" data-category="mold" data-id="1" data-name="pattern" data-rows='["id","price"]' disabled>
+                                <option value="!">—</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+
+                        
+                <table class="order_table_button">
+                    <tr>
+                        <td class="add_item_button_space"></td>
+                        <td>
+                            <button name="add-element-modal" class="js-modal-hide js-modal-cancel order_operation_button"> ОТМЕНА </button>
+                        </td>
+                        <td class="add_item_button_space"></td>
+                        <td>                            
+                            <button name="add-element-modal" class="order_operation_button js-modal-hide js-modal-ok" data-category="mold"> ДОБАВИТЬ </button>
+                        </td>
+                        <td class="add_item_button_space"></td>
+                    </tr>
+                </table>
+                </center>
+            </div>
+        </div>
+    </div>  
+    
+    
+    <div id="finish-order-modal">
+        <h1>Оформить заказ</h1>
+        <center>
+        <table class="order_table">
+            <tr class="order_tr_title">
+                <td class="order-name-title">имя или пометка заказа</td>
+                <td id="switch-text">&nbsp;печать&nbsp;</td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="order-name" class="order-name-title" />
+                </td>
+
+                <td id="switch-td">
+                    <center>
+                    <label class="switch">
+                        <input type="checkbox" name="print">
+                        <span class="slider round"></span>
+                    </label>
+                    </center>
+                </td>
+            </tr>               
+        </table>
+        <table class="order_table_button">
+            <tr>
+                <td class="add_item_button_space"></td>
+                <td>
+                    <button name="finish-order-modal" class="js-modal-hide js-modal-cancel order_operation_button"> ОТМЕНА </button>
+                </td>
+                <td class="add_item_button_space"></td>
+                <td>                            
+                    <button name="finish-order-modal" class="order_operation_button js-modal-hide js-modal-ok"> ДОБАВИТЬ </button>
+                </td>
+                <td class="add_item_button_space"></td>
+            </tr>
+        </table>
+        </center>  
+    </div>
+    
+    
+    <div id="tint-modal"></div>
+
+    
+    <script src="plugins/js/tabs.js"></script>
+    <script src="plugins/js/modal.js"></script>
+    <script src="plugins/js/handler.js"></script>
+    <script src="plugins/js/pdf4print.js"></script>    
+    <script src="plugins/select-plugin/js/select.js"></script>
+    
+</body>
+</html>
